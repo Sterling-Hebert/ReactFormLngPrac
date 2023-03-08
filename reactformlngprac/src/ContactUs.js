@@ -8,6 +8,9 @@ function ContactUs() {
   const [comments, setComments] = useState("");
   const [validationErrors, setValidationErrors] = useState([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  //new additions
+  const [staffType, setStaffType] = useState(false);
+  const [emailUnchecked, setemailUnchecked] = useState(false);
 
   useEffect(() => {
     const errors = [];
@@ -29,6 +32,8 @@ function ContactUs() {
       email,
       phone,
       phoneType,
+      staffType,
+      emailUnchecked,
       comments,
       submittedOn: new Date(),
     };
@@ -40,6 +45,8 @@ function ContactUs() {
     setEmail("");
     setPhone("");
     setPhoneType("");
+    setStaffType(false)
+    setemailUnchecked(false)
     setComments("");
     setValidationErrors([]);
     setHasSubmitted(false);
@@ -98,8 +105,17 @@ function ContactUs() {
             <option>Mobile</option>
           </select>
         </div>
+{/* new addition of setStaffType */}
         <div>
-          <label htmlFor="comments">Comments:</label>
+          <label>Instructor</label>
+          <input inline label="Response Instructor" type="radio" id="radioA" value="Instructor" checked={staffType === "Instructor"} onChange={(e)=>{setStaffType(e.target.value)}}/>
+
+          <label>Student</label>
+          <input inline label="Response Student" type="radio" id="radioB" value="Student" checked={staffType === "Student"} onChange={(e)=>{setStaffType(e.target.value)}}/>
+        </div>
+
+        <div>
+          <label htmlFor="comments">Bio:</label>
           <textarea
             id="comments"
             name="comments"
